@@ -33,9 +33,9 @@ class Capistrano::Git < Capistrano::SCM
       if tree = fetch(:repo_tree)
         tree = tree.slice %r#^/?(.*?)/?$#, 1
         components = tree.split('/').size
-        git :archive, fetch(:branch), tree, "| tar -x --strip-components #{components} -f - -C", release_path
+        git :archive, fetch(:branch), tree, "| tar -x --strip-components #{components} -m -f - -C", release_path
       else
-        git :archive, fetch(:branch), '| tar -x -f - -C', release_path
+        git :archive, fetch(:branch), '| tar -x -m -f - -C', release_path
       end
     end
 
